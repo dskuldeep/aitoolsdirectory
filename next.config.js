@@ -15,13 +15,7 @@ const nextConfig = {
       bodySizeLimit: '10mb',
     },
   },
-  // Ensure Prisma works on Vercel
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push('@prisma/client')
-    }
-    return config
-  },
+  // Prisma will be generated automatically during build
 }
 
 module.exports = nextConfig
