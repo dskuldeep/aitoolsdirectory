@@ -12,7 +12,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 })
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   // Only use adapter for OAuth providers, not for credentials
   adapter: PrismaAdapter(prisma) as any,
   providers: [
