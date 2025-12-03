@@ -16,6 +16,14 @@ const nextConfig = {
     },
   },
   // Prisma will be generated automatically during build
+  eslint: {
+    // Only fail on errors, not warnings during build
+    ignoreDuringBuilds: false,
+  },
+  typescript: {
+    // Only fail on errors, not warnings during build
+    ignoreBuildErrors: false,
+  },
 }
 
 module.exports = nextConfig
