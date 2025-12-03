@@ -11,12 +11,18 @@ export default async function AdminLayout({
   const user = await getCurrentUser()
 
   if (!user) {
-    redirect('/auth/signin')
+    console.log('[AdminLayout] No user found - redirecting to signin')
+    redirect('/auth/signin?callbackUrl=/admin')
   }
 
+  console.log('[AdminLayout] User found:', { email: user.email, role: user.role, id: user.id })
+
   if (user.role !== 'admin' && user.role !== 'editor') {
-    redirect('/')
+    console.log('[AdminLayout] User role is not admin/editor:', user.role)
+    redirect('/?error=insufficient_permissions')
   }
+
+  console.log('[AdminLayout] Access granted')
 
   return (
     <div className="flex min-h-screen">

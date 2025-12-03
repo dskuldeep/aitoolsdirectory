@@ -33,8 +33,10 @@ export default function SignInPage() {
         console.error('Sign in error:', result.error)
         setError(result.error === 'CredentialsSignin' ? 'Invalid email or password' : result.error)
       } else if (result?.ok) {
-        router.push('/admin')
-        router.refresh()
+        console.log('Sign in successful, redirecting to admin')
+        // Wait a bit for session to be set
+        await new Promise(resolve => setTimeout(resolve, 100))
+        window.location.href = '/admin'
       } else {
         setError('An unexpected error occurred')
       }
