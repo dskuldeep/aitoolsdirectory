@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  password      String?   // Hashed password for credentials auth
+  role          String    @default("user") // admin, editor, author, user
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  tools         Tool[]    @relation("ToolSubmitter")
+  articles      Article[]
+  approvedTools Tool[]    @relation("ToolApprover")
+
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Tool {
+  id            Int       @id @default(autoincrement())
+  slug          String    @unique
+  name          String
+  tagline       String?
+  description   String    @db.Text
+  category      String
+  tags          String[]
+  website       String?
+  github        String?
+  pricing       String?   // e.g., Free, Freemium, Paid
+  license       String?
+  integrations  String[]
+  screenshots   Json?     // array of image URLs/objects
+  approved      Boolean   @default(false)
+  featured      Boolean   @default(false)
+  submittedBy   Int?
+  approvedBy    Int?
+  approvedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  views         Int       @default(0)
+
+  // Relations
+  submitter     User?     @relation("ToolSubmitter", fields: [submittedBy], references: [id])
+  approver      User?     @relation("ToolApprover", fields: [approvedBy], references: [id])
+
+  @@index([slug])
+  @@index([category])
+  @@index([approved])
+  @@index([featured])
+  @@index([createdAt])
+  @@index([tags])
+  @@map("tools")
+}
+
+model Article {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  excerpt     String?   @db.Text
+  body        String    @db.Text // markdown
+  authorId    Int
+  tags        String[]
+  published   Boolean   @default(false)
+  featured    Boolean   @default(false)
+  publishedAt DateTime?
+  heroImage   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  views       Int       @default(0)
+
+  // Relations
+  author      User      @relation(fields: [authorId], references: [id])
+
+  @@index([slug])
+  @@index([published])
+  @@index([publishedAt])
+  @@index([tags])
+  @@map("articles")
+}
+
+model Submission {
+  id             Int       @id @default(autoincrement())
+  toolData       Json      // full tool data as JSON
+  status         String    @default("pending") // pending, approved, rejected, changes_requested
+  submitterEmail String
+  submitterName  String?
+  reviewedBy     Int?
+  reviewedAt     DateTime?
+  rejectionReason String?  @db.Text
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("submissions")
+}
+
+model Image {
+  id          String   @id
+  filename    String
+  contentType String
+  data        String   @db.Text // Base64 encoded image data
+  size        Int      // Size in bytes
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("images")
+}
+

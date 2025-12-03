@@ -1,0 +1,374 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-serif: 'Source Serif Pro', Georgia, serif;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+  }
+
+  .dark body {
+    @apply bg-neutral-900 text-neutral-50;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* TipTap Editor Styles - Notion-like */
+.notion-editor-wrapper {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.notion-editor {
+  outline: none;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #37352f;
+}
+
+.dark .notion-editor {
+  color: #e9e9e7;
+}
+
+.ProseMirror {
+  outline: none;
+  min-height: 400px;
+}
+
+.ProseMirror p {
+  margin: 0.25em 0;
+  padding: 0.125em 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: rgba(55, 53, 47, 0.4);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-size: 16px;
+}
+
+.dark .ProseMirror p.is-editor-empty:first-child::before {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.625em;
+  margin: 0.5em 0;
+  list-style-position: outside;
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.ProseMirror li {
+  margin: 0.25em 0;
+  padding: 0.125em 0;
+  line-height: 1.6;
+  display: list-item;
+}
+
+.ProseMirror li p {
+  margin: 0;
+}
+
+.ProseMirror a {
+  color: #0b70e1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.dark .ProseMirror a {
+  color: #4a9eff;
+}
+
+.ProseMirror a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+  margin: 1em 0;
+  display: block;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3 {
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  color: #37352f;
+}
+
+.dark .ProseMirror h1,
+.dark .ProseMirror h2,
+.dark .ProseMirror h3 {
+  color: #e9e9e7;
+}
+
+.ProseMirror h1 {
+  font-size: 2em;
+  margin-top: 0.75em;
+  margin-bottom: 0.25em;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 0.25em;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25em;
+  margin-top: 0.75em;
+  margin-bottom: 0.25em;
+}
+
+.ProseMirror code {
+  background-color: rgba(135, 131, 120, 0.15);
+  border-radius: 0.25rem;
+  padding: 0.125em 0.375em;
+  font-size: 0.9em;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  color: #eb5757;
+}
+
+.dark .ProseMirror code {
+  background-color: rgba(135, 131, 120, 0.3);
+  color: #ff6b6b;
+}
+
+.ProseMirror pre {
+  background-color: rgba(135, 131, 120, 0.15);
+  border-radius: 0.375rem;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.dark .ProseMirror pre {
+  background-color: rgba(135, 131, 120, 0.2);
+}
+
+.ProseMirror pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.ProseMirror blockquote {
+  border-left: 3px solid rgba(55, 53, 47, 0.16);
+  padding-left: 1em;
+  margin: 0.75em 0;
+  font-style: normal;
+  color: rgba(55, 53, 47, 0.7);
+}
+
+.dark .ProseMirror blockquote {
+  border-left-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ProseMirror hr {
+  border: none;
+  border-top: 1px solid rgba(55, 53, 47, 0.16);
+  margin: 1.5em 0;
+}
+
+.dark .ProseMirror hr {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.ProseMirror strong {
+  font-weight: 600;
+}
+
+.ProseMirror em {
+  font-style: italic;
+}
+
+/* Callout/Blockquote Styles */
+.ProseMirror blockquote.notion-callout,
+.article-content blockquote.notion-callout {
+  border-left: 3px solid #0b70e1;
+  background-color: rgba(11, 112, 225, 0.05);
+  border-radius: 0.375rem;
+  padding: 1em 1.25em;
+  margin: 1em 0;
+  font-style: normal;
+  color: inherit;
+}
+
+.dark .ProseMirror blockquote.notion-callout,
+.dark .article-content blockquote.notion-callout {
+  border-left-color: #4a9eff;
+  background-color: rgba(74, 158, 255, 0.1);
+}
+
+/* Article Content Rendering Styles */
+.article-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.article-content p {
+  margin: 0.75em 0;
+  line-height: 1.7;
+  font-size: 18px;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 2em 0;
+  display: block;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.article-content h1 {
+  font-size: 2.5em;
+  margin-top: 1em;
+}
+
+.article-content h2 {
+  font-size: 2em;
+}
+
+.article-content h3 {
+  font-size: 1.5em;
+}
+
+.article-content ul,
+.article-content ol {
+  padding-left: 1.75em;
+  margin: 1em 0;
+  list-style-position: outside;
+}
+
+.article-content ul {
+  list-style-type: disc;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.article-content li {
+  margin: 0.5em 0;
+  line-height: 1.7;
+  display: list-item;
+}
+
+.article-content code {
+  background-color: rgba(135, 131, 120, 0.15);
+  border-radius: 0.25rem;
+  padding: 0.125em 0.375em;
+  font-size: 0.9em;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.dark .article-content code {
+  background-color: rgba(135, 131, 120, 0.3);
+}
+
+.article-content pre {
+  background-color: rgba(135, 131, 120, 0.15);
+  border-radius: 0.5rem;
+  padding: 1.25em;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.dark .article-content pre {
+  background-color: rgba(135, 131, 120, 0.2);
+}
+
+.article-content pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.article-content a {
+  color: #0b70e1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dark .article-content a {
+  color: #4a9eff;
+}
+
+.article-content a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Tippy.js Popup Styling - Remove default black box */
+.tippy-box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.tippy-content {
+  padding: 0 !important;
+}
+
+.tippy-arrow {
+  display: none !important;
+}
+

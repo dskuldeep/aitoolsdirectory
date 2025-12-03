@@ -1,0 +1,61 @@
+import { prisma } from '@/lib/prisma'
+
+export async function GET() {
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+
+  const articles = await prisma.article.findMany({
+    where: { published: true },
+    take: 20,
+    orderBy: { publishedAt: 'desc' },
+    include: {
+      author: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+  })
+
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Tool Directory Blog</title>
+    <description>Latest news and articles about AI tools</description>
+    <link>${baseUrl}</link>
+    <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-US</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    ${articles
+      .map(
+        (article) => `
+    <item>
+      <title>${escapeXml(article.title)}</title>
+      <description>${escapeXml(article.excerpt || article.body.slice(0, 200))}</description>
+      <link>${baseUrl}/blog/${article.slug}</link>
+      <guid isPermaLink="true">${baseUrl}/blog/${article.slug}</guid>
+      <pubDate>${(article.publishedAt || article.createdAt).toUTCString()}</pubDate>
+      ${article.author.name ? `<author>${escapeXml(article.author.email)} (${escapeXml(article.author.name)})</author>` : ''}
+      ${article.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join('')}
+    </item>`
+      )
+      .join('')}
+  </channel>
+</rss>`
+
+  return new Response(rss, {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
+  })
+}
+
+function escapeXml(unsafe: string) {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
