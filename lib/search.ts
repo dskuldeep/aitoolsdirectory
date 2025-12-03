@@ -151,7 +151,7 @@ export async function searchTools(options: SearchOptions = {}): Promise<SearchRe
       total: response.estimatedTotalHits || 0,
       page,
       limit,
-      facets: response.facetsDistribution,
+      facets: response.facetDistribution,
     }
   } catch (error) {
     console.error('Search error:', error)

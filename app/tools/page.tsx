@@ -104,8 +104,8 @@ async function getUniqueValues(field: 'pricing' | 'license') {
   const values = Array.from(
     new Set(
       tools
-        .map((t) => t[field])
-        .filter((v): v is string => v !== null && v !== undefined && v.trim() !== '')
+        .map((t) => t[field] as string | null)
+        .filter((v): v is string => v !== null && v !== undefined && typeof v === 'string' && v.trim() !== '')
     )
   )
   return values.sort()

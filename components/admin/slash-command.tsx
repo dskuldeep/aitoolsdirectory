@@ -305,7 +305,13 @@ export const SlashCommand = Extension.create({
                 return true
               }
 
-              return component.ref?.onKeyDown(props)
+              // Handle keyboard navigation
+              if (props.event.key === 'ArrowUp' || props.event.key === 'ArrowDown' || props.event.key === 'Enter') {
+                // The keyboard handling is done in the SlashCommandList component via useEffect
+                return false
+              }
+
+              return false
             },
             onExit: () => {
               if (popup && popup[0]) {
