@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Button } from './button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { cn } from '@/lib/utils'
 
 interface PaginationProps {
   currentPage: number
@@ -21,7 +20,7 @@ export function Pagination({ currentPage, totalPages, baseUrl, searchParams = {}
   const pages = []
   const maxVisible = 5
   let start = Math.max(1, currentPage - Math.floor(maxVisible / 2))
-  let end = Math.min(totalPages, start + maxVisible - 1)
+  const end = Math.min(totalPages, start + maxVisible - 1)
 
   if (end - start < maxVisible - 1) {
     start = Math.max(1, end - maxVisible + 1)

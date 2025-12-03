@@ -7,7 +7,7 @@ import { ToolCard } from '@/components/tools/tool-card'
 import { SearchBar } from '@/components/filters/search-bar'
 import { FilterPills } from '@/components/filters/filter-pills'
 import { prisma } from '@/lib/prisma'
-import { SparklesIcon, FunnelIcon } from '@heroicons/react/24/outline'
+import { SparklesIcon } from '@heroicons/react/24/outline'
 
 // Use SSR for tools listing
 export const dynamic = 'force-dynamic'

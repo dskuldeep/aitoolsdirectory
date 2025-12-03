@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ApproveSubmissionButton, RejectSubmissionButton } from '@/components/admin/moderation-actions'
 import { formatDate } from '@/lib/utils'

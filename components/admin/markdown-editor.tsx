@@ -162,7 +162,7 @@ export function MarkdownEditor({ content, onChange, placeholder = 'Type "/" for 
       attributes: {
         class: 'notion-editor min-h-[400px] focus:outline-none',
       },
-      handlePaste: (view, event, slice) => {
+      handlePaste: (view, event, _slice) => {
         const clipboardData = event.clipboardData
         if (!clipboardData) return false
         
@@ -296,7 +296,7 @@ export function MarkdownEditor({ content, onChange, placeholder = 'Type "/" for 
                 ]
                 
                 patterns.forEach((pattern) => {
-                  contentToInsert = contentToInsert.replace(pattern, (match, p1) => {
+                  contentToInsert = contentToInsert.replace(pattern, (match, _p1) => {
                     // Don't replace if it's already in an img tag or link
                     if (match.includes('<img') || match.includes('src=') || match.includes('href=') || match.includes('</a>')) {
                       return match

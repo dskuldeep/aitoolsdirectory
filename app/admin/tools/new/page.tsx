@@ -48,7 +48,6 @@ export default function NewToolPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<ToolFormData>({
     resolver: zodResolver(toolSchema),
     defaultValues: {

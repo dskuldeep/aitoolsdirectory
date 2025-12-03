@@ -206,7 +206,7 @@ export const SlashCommand = Extension.create({
       onImageUpload: () => {},
       suggestion: {
         char: '/',
-        command: ({ editor, range, props }: { editor: any; range: any; props: SlashCommandItem }) => {
+        command: ({ editor, range: _range, props }: { editor: any; range: any; props: SlashCommandItem }) => {
           if (editor && props) {
             props.command(editor)
           }

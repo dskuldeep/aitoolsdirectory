@@ -234,8 +234,8 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                         remarkPlugins={[remarkGfm]} 
                         rehypePlugins={[rehypeSanitize]}
                         components={{
-                          img: ({ node, ...props }) => (
-                            <img {...props} className="max-w-full rounded-lg my-4 shadow-md" />
+                          img: ({ node: _node, ...props }) => (
+                            <img {...props} alt="" className="max-w-full rounded-lg my-4 shadow-md" />
                           ),
                         }}
                       >
