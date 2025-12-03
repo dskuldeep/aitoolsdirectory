@@ -44,7 +44,18 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
         if (isAdminRoute) {
-          return !!token && ((token as any)?.role === 'admin' || (token as any)?.role === 'editor')
+          const hasToken = !!token
+          const role = (token as any)?.role
+          const hasAccess = hasToken && (role === 'admin' || role === 'editor')
+          console.log('[Middleware authorized callback]', { 
+            isAdminRoute, 
+            hasToken, 
+            role, 
+            hasAccess 
+          })
+          // Always return true here and let the middleware function handle the actual check
+          // This ensures the JWT callback can run first to refresh the role
+          return hasToken
         }
         return true
       },
