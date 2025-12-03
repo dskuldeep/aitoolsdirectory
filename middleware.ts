@@ -42,20 +42,11 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token, req }) => {
+        // For admin routes, just check if token exists
+        // The actual role check happens in the middleware function after JWT callback runs
         const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
         if (isAdminRoute) {
-          const hasToken = !!token
-          const role = (token as any)?.role
-          const hasAccess = hasToken && (role === 'admin' || role === 'editor')
-          console.log('[Middleware authorized callback]', { 
-            isAdminRoute, 
-            hasToken, 
-            role, 
-            hasAccess 
-          })
-          // Always return true here and let the middleware function handle the actual check
-          // This ensures the JWT callback can run first to refresh the role
-          return hasToken
+          return !!token
         }
         return true
       },

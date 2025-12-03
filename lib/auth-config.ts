@@ -107,19 +107,16 @@ export const authOptions: NextAuthOptions = {
             select: { role: true },
           })
           if (dbUser) {
-            const oldRole = token.role
             token.role = dbUser.role
-            if (oldRole !== dbUser.role) {
-              console.log('[JWT] Role updated from database:', { oldRole, newRole: dbUser.role })
-            }
           } else {
             console.log('[JWT] User not found in database for id:', token.id)
+            token.role = 'user' // Default to user if not found
           }
         } catch (error) {
           console.error('[JWT] Error fetching user role:', error)
+          // Keep existing role on error
         }
       }
-      console.log('[JWT] Returning token with role:', token.role)
       return token
     },
   },
