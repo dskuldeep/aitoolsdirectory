@@ -25,11 +25,11 @@ export function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-64 border-r border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+    <div className="h-full w-full border-r border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 flex flex-col">
       <div className="flex h-16 items-center border-b border-neutral-200 px-6 dark:border-neutral-800">
         <h1 className="text-lg font-bold">Admin</h1>
       </div>
-      <nav className="h-[calc(100vh-4rem)] overflow-y-auto p-4">
+      <nav className="p-4 flex-1 overflow-y-auto">
         <ul className="space-y-1">
           {navigation.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + '/')

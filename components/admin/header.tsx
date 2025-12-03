@@ -14,7 +14,7 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ user }: AdminHeaderProps) {
   return (
-    <header className="fixed top-0 left-64 right-0 z-10 flex h-16 items-center justify-between border-b border-neutral-200 bg-white px-8 dark:border-neutral-800 dark:bg-neutral-900">
+    <header className="flex h-16 items-center justify-between border-b border-neutral-200 bg-white px-8 dark:border-neutral-800 dark:bg-neutral-900">
       <div className="flex items-center gap-4">
         <Link href="/" className="text-sm text-neutral-600 hover:text-primary-600 dark:text-neutral-400">
           ← Back to Site

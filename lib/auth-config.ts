@@ -96,7 +96,21 @@ export const authOptions: NextAuthOptions = {
       // Initial sign in
       if (user) {
         token.id = user.id
-        token.role = (user as any).role
+        token.role = (user as any).role || 'user'
+      }
+      // On subsequent requests, refresh role from database if needed
+      if (token.id && !token.role) {
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: parseInt(token.id as string) },
+            select: { role: true },
+          })
+          if (dbUser) {
+            token.role = dbUser.role
+          }
+        } catch (error) {
+          console.error('Error fetching user role:', error)
+        }
       }
       return token
     },

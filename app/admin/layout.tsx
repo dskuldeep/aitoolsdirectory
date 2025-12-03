@@ -10,16 +10,29 @@ export default async function AdminLayout({
 }) {
   const user = await getCurrentUser()
 
-  if (!user || (user.role !== 'admin' && user.role !== 'editor')) {
+  if (!user) {
+    redirect('/auth/signin')
+  }
+
+  if (user.role !== 'admin' && user.role !== 'editor') {
     redirect('/')
   }
 
   return (
     <div className="flex min-h-screen">
-      <AdminSidebar />
-      <div className="ml-64 flex flex-1 flex-col">
-        <AdminHeader user={user} />
-        <main className="mt-16 flex-1 overflow-y-auto p-8">{children}</main>
+      {/* Fixed Sidebar */}
+      <div className="fixed left-0 top-0 h-screen w-64">
+        <AdminSidebar />
+      </div>
+      <div className="flex flex-1 flex-col pl-64">
+        {/* Fixed Header */}
+        <div className="fixed top-0 left-64 right-0 z-10">
+          <AdminHeader user={user} />
+        </div>
+        {/* Main content, scrolls independently */}
+        <main className="flex-1 p-8 pt-24 overflow-y-auto">
+          {children}
+        </main>
       </div>
     </div>
   )
