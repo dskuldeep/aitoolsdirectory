@@ -8,13 +8,19 @@ export default withAuth(
 
     if (isAdminRoute) {
       if (!token) {
-        return NextResponse.redirect(new URL('/auth/signin', req.url))
+        console.log('[Middleware] No token found, redirecting to signin')
+        const signInUrl = new URL('/auth/signin', req.url)
+        signInUrl.searchParams.set('callbackUrl', '/admin')
+        return NextResponse.redirect(signInUrl)
       }
 
       const role = (token as any)?.role
+      console.log('[Middleware] Admin route access check:', { role, hasToken: !!token })
       if (role !== 'admin' && role !== 'editor') {
+        console.log('[Middleware] Insufficient role, redirecting to home')
         return NextResponse.redirect(new URL('/', req.url))
       }
+      console.log('[Middleware] Admin access granted')
     }
 
     // Security headers

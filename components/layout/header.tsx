@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
 import { MagnifyingGlassIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
@@ -9,6 +10,13 @@ import { MagnifyingGlassIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outl
 export function Header() {
   const { data: session } = useSession()
   const { theme, toggleTheme } = useTheme()
+  const router = useRouter()
+
+  const handleAdminClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    console.log('Admin button clicked, session:', session)
+    router.push('/admin')
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-900/80">
@@ -63,11 +71,13 @@ export function Header() {
               <>
                 {((session.user as any)?.role === 'admin' ||
                   (session.user as any)?.role === 'editor') && (
-                  <Link href="/admin">
-                    <Button variant="outline" size="sm">
-                      Admin
-                    </Button>
-                  </Link>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={handleAdminClick}
+                  >
+                    Admin
+                  </Button>
                 )}
                 <Button variant="outline" size="sm" onClick={() => signOut()}>
                   Sign Out
