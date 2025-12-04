@@ -13,11 +13,7 @@ import type { Metadata } from 'next'
 // Use SSR for blog listing
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: { page?: string }
-}): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   // Canonical URL without page number for SEO
   return {
     alternates: {
