@@ -15,12 +15,17 @@ export default withAuth(
       }
 
       const role = (token as any)?.role
-      console.log('[Middleware] Admin route access check:', { role, hasToken: !!token })
+      console.log('[Middleware] Admin route access check:', { 
+        role, 
+        hasToken: !!token,
+        tokenKeys: token ? Object.keys(token) : [],
+        fullToken: process.env.NODE_ENV === 'development' ? token : undefined
+      })
       if (role !== 'admin' && role !== 'editor') {
-        console.log('[Middleware] Insufficient role, redirecting to home')
+        console.log('[Middleware] Insufficient role, redirecting to home. Role was:', role)
         return NextResponse.redirect(new URL('/', req.url))
       }
-      console.log('[Middleware] Admin access granted')
+      console.log('[Middleware] Admin access granted, proceeding to page')
     }
 
     // Security headers

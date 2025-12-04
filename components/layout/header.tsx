@@ -15,7 +15,9 @@ export function Header() {
   const handleAdminClick = (e: React.MouseEvent) => {
     e.preventDefault()
     console.log('Admin button clicked, session:', session)
-    router.push('/admin')
+    console.log('User role:', (session?.user as any)?.role)
+    // Use window.location for a full page navigation to ensure middleware runs
+    window.location.href = '/admin'
   }
 
   return (
