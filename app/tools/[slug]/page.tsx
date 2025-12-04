@@ -67,15 +67,21 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const description = tool.tagline || tool.description.slice(0, 160)
   const screenshots = tool.screenshots as any
   const image = screenshots?.[0]?.url || `${process.env.NEXTAUTH_URL}/og-image.png`
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const canonicalUrl = `${baseUrl}/tools/${params.slug}`
 
   return {
     title: tool.name,
     description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: tool.name,
       description,
       images: [image],
       type: 'website',
+      url: canonicalUrl,
     },
     twitter: {
       card: 'summary_large_image',

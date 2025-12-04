@@ -1,10 +1,15 @@
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Container } from '@/components/layout/container'
+import { getCanonicalUrl } from '@/lib/utils'
+import type { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'About | AI Tool Directory',
   description: 'Learn about the AI Tool Directory and our mission to help you discover the best AI tools.',
+  alternates: {
+    canonical: getCanonicalUrl('/about'),
+  },
 }
 
 export default function AboutPage() {

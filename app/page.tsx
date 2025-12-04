@@ -6,11 +6,18 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ToolCard } from '@/components/tools/tool-card'
 import { prisma } from '@/lib/prisma'
-import { formatDate } from '@/lib/utils'
+import { formatDate, getCanonicalUrl } from '@/lib/utils'
 import { SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline'
+import type { Metadata } from 'next'
 
 // Use SSR for homepage
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: getCanonicalUrl('/'),
+  },
+}
 
 async function getFeaturedTools() {
   return prisma.tool.findMany({

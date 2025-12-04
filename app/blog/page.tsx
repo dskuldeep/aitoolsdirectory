@@ -6,11 +6,25 @@ import { Tag } from '@/components/ui/tag'
 import { Pagination } from '@/components/ui/pagination'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
-import { formatDate } from '@/lib/utils'
+import { formatDate, getCanonicalUrl } from '@/lib/utils'
 import { SparklesIcon } from '@heroicons/react/24/outline'
+import type { Metadata } from 'next'
 
 // Use SSR for blog listing
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { page?: string }
+}): Promise<Metadata> {
+  // Canonical URL without page number for SEO
+  return {
+    alternates: {
+      canonical: getCanonicalUrl('/blog'),
+    },
+  }
+}
 
 async function getArticles(searchParams: { page?: string }) {
   const page = parseInt(searchParams.page || '1')

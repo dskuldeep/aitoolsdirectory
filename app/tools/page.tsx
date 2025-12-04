@@ -8,9 +8,43 @@ import { SearchBar } from '@/components/filters/search-bar'
 import { FilterPills } from '@/components/filters/filter-pills'
 import { prisma } from '@/lib/prisma'
 import { SparklesIcon } from '@heroicons/react/24/outline'
+import { getCanonicalUrl } from '@/lib/utils'
+import type { Metadata } from 'next'
 
 // Use SSR for tools listing
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: {
+    page?: string
+    category?: string
+    tag?: string
+    pricing?: string
+    license?: string
+    sort?: string
+    q?: string
+  }
+}): Promise<Metadata> {
+  // Build canonical URL with search params (excluding page number for SEO)
+  const params = new URLSearchParams()
+  if (searchParams.category) params.set('category', searchParams.category)
+  if (searchParams.tag) params.set('tag', searchParams.tag)
+  if (searchParams.pricing) params.set('pricing', searchParams.pricing)
+  if (searchParams.license) params.set('license', searchParams.license)
+  if (searchParams.sort) params.set('sort', searchParams.sort)
+  if (searchParams.q) params.set('q', searchParams.q)
+  
+  const queryString = params.toString()
+  const canonicalPath = queryString ? `/tools?${queryString}` : '/tools'
+  
+  return {
+    alternates: {
+      canonical: getCanonicalUrl(canonicalPath),
+    },
+  }
+}
 
 async function getTools(searchParams: {
   page?: string

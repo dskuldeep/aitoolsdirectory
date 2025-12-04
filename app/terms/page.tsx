@@ -1,10 +1,15 @@
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Container } from '@/components/layout/container'
+import { getCanonicalUrl } from '@/lib/utils'
+import type { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Terms of Service | AI Tool Directory',
   description: 'Terms of Service for AI Tool Directory.',
+  alternates: {
+    canonical: getCanonicalUrl('/terms'),
+  },
 }
 
 export default function TermsPage() {

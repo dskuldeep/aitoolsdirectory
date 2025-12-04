@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://example.com',
+    url: process.env.NEXTAUTH_URL || 'https://example.com',
     siteName: 'AI Tool Directory',
     title: 'AI Tool Directory - Discover the Best AI Tools',
     description:

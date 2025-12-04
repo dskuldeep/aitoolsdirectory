@@ -70,15 +70,21 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   const description = article.excerpt || article.body.slice(0, 160)
   const image = article.heroImage || `${process.env.NEXTAUTH_URL}/og-image.png`
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const canonicalUrl = `${baseUrl}/blog/${params.slug}`
 
   return {
     title: article.title,
     description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: article.title,
       description,
       images: [image],
       type: 'article',
+      url: canonicalUrl,
       publishedTime: article.publishedAt?.toISOString(),
       authors: article.author.name ? [article.author.name] : [],
       tags: article.tags,
