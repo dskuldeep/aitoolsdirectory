@@ -8,8 +8,9 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
+  let user
   try {
-    const user = await getCurrentUser()
+    user = await getCurrentUser()
 
     if (!user) {
       console.log('[AdminLayout] No user found - redirecting to signin')
@@ -26,6 +27,10 @@ export default async function AdminLayout({
     console.log('[AdminLayout] Access granted')
   } catch (error) {
     console.error('[AdminLayout] Error:', error)
+    redirect('/auth/signin?callbackUrl=/admin')
+  }
+
+  if (!user) {
     redirect('/auth/signin?callbackUrl=/admin')
   }
 
