@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
 import { MagnifyingGlassIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
@@ -10,7 +9,6 @@ import { MagnifyingGlassIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outl
 export function Header() {
   const { data: session } = useSession()
   const { theme, toggleTheme } = useTheme()
-  const router = useRouter()
 
   const handleAdminClick = (e: React.MouseEvent) => {
     e.preventDefault()
