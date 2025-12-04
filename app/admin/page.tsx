@@ -3,7 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
-export const revalidate = 60
+// Force dynamic rendering for admin pages
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 async function getStats() {
   try {
