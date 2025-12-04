@@ -25,9 +25,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Handle connection cleanup on serverless
-if (typeof window === 'undefined') {
-  process.on('beforeExit', async () => {
-    await prisma.$disconnect()
-  })
+if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+  // Only disconnect on process exit in production
+  const disconnect = async () => {
+    try {
+      await prisma.$disconnect()
+    } catch (error) {
+      // Ignore disconnect errors
+    }
+  }
+  
+  process.on('beforeExit', disconnect)
+  process.on('SIGINT', disconnect)
+  process.on('SIGTERM', disconnect)
 }
 

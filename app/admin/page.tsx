@@ -6,25 +6,38 @@ import { Button } from '@/components/ui/button'
 export const revalidate = 60
 
 async function getStats() {
-  const [tools, articles, submissions, users] = await Promise.all([
-    prisma.tool.count(),
-    prisma.article.count(),
-    prisma.submission.count({ where: { status: 'pending' } }),
-    prisma.user.count(),
-  ])
+  try {
+    const [tools, articles, submissions, users] = await Promise.all([
+      prisma.tool.count().catch(() => 0),
+      prisma.article.count().catch(() => 0),
+      prisma.submission.count({ where: { status: 'pending' } }).catch(() => 0),
+      prisma.user.count().catch(() => 0),
+    ])
 
-  const [approvedTools, publishedArticles] = await Promise.all([
-    prisma.tool.count({ where: { approved: true } }),
-    prisma.article.count({ where: { published: true } }),
-  ])
+    const [approvedTools, publishedArticles] = await Promise.all([
+      prisma.tool.count({ where: { approved: true } }).catch(() => 0),
+      prisma.article.count({ where: { published: true } }).catch(() => 0),
+    ])
 
-  return {
-    tools,
-    approvedTools,
-    articles,
-    publishedArticles,
-    pendingSubmissions: submissions,
-    users,
+    return {
+      tools,
+      approvedTools,
+      articles,
+      publishedArticles,
+      pendingSubmissions: submissions,
+      users,
+    }
+  } catch (error) {
+    console.error('[getStats] Error:', error)
+    // Return default stats on error
+    return {
+      tools: 0,
+      approvedTools: 0,
+      articles: 0,
+      publishedArticles: 0,
+      pendingSubmissions: 0,
+      users: 0,
+    }
   }
 }
 
