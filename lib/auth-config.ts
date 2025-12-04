@@ -97,27 +97,39 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id
         token.role = (user as any).role || 'user'
-        console.log('[JWT] Initial sign in, setting role:', token.role)
+        console.log('[JWT] Initial sign in, setting role:', token.role, 'for user:', user.email)
+        return token
       }
-      // On subsequent requests, only refresh role if it's missing
-      // Don't query DB on every request to avoid connection issues in serverless
-      if (token.id && !token.role) {
-        try {
-          const userId = typeof token.id === 'string' ? parseInt(token.id) : token.id
-          const dbUser = await prisma.user.findUnique({
-            where: { id: userId },
-            select: { role: true },
-          })
-          if (dbUser) {
-            token.role = dbUser.role
-          } else {
-            token.role = 'user' // Default fallback
-          }
-        } catch (error) {
-          console.error('[JWT] Error fetching user role:', error)
-          // Default to 'user' on error if role is missing
-          if (!token.role) {
-            token.role = 'user'
+
+      // On subsequent requests, ensure role is always set
+      // In production, always refresh from DB to ensure it's current
+      if (token.id) {
+        // If role is missing or we're in production, refresh from DB
+        const shouldRefresh = !token.role || process.env.NODE_ENV === 'production'
+        
+        if (shouldRefresh) {
+          try {
+            const userId = typeof token.id === 'string' ? parseInt(token.id) : token.id
+            const dbUser = await prisma.user.findUnique({
+              where: { id: userId },
+              select: { role: true },
+            })
+            if (dbUser) {
+              const oldRole = token.role
+              token.role = dbUser.role
+              if (oldRole !== dbUser.role) {
+                console.log('[JWT] Role refreshed from DB:', { oldRole, newRole: dbUser.role, userId })
+              }
+            } else {
+              console.log('[JWT] User not found in DB, defaulting to user role')
+              token.role = 'user' // Default fallback
+            }
+          } catch (error) {
+            console.error('[JWT] Error fetching user role:', error)
+            // Keep existing role on error, or default to 'user'
+            if (!token.role) {
+              token.role = 'user'
+            }
           }
         }
       }
@@ -126,6 +138,7 @@ export const authOptions: NextAuthOptions = {
       if (!token.role) {
         token.role = 'user'
       }
+
       return token
     },
   },
@@ -135,6 +148,20 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  cookies: {
+    sessionToken: {
+      name: process.env.NODE_ENV === 'production' 
+        ? '__Secure-next-auth.session-token'
+        : 'next-auth.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 }

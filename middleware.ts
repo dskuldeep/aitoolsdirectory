@@ -19,7 +19,10 @@ export default withAuth(
         role, 
         hasToken: !!token,
         tokenKeys: token ? Object.keys(token) : [],
-        fullToken: process.env.NODE_ENV === 'development' ? token : undefined
+        tokenId: token ? (token as any).id : undefined,
+        url: req.url,
+        // Log full token in production too for debugging
+        fullToken: token
       })
       if (role !== 'admin' && role !== 'editor') {
         console.log('[Middleware] Insufficient role, redirecting to home. Role was:', role)
