@@ -6,8 +6,8 @@ primary_region = "iad"
 
 [build]
 
-[deploy]
-  release_command = "npx prisma migrate deploy"
+# Migrations will be run manually via: flyctl ssh console -a aitoolsdirectory
+# Then run: npx prisma migrate deploy
 
 [env]
   NODE_ENV = "production"
