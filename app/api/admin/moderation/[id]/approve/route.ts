@@ -42,6 +42,7 @@ export async function POST(
         pricing: toolData.pricing,
         license: toolData.license,
         integrations: toolData.integrations || [],
+        icon: toolData.icon || null,
         screenshots: toolData.screenshots || [],
         approved: true,
         submittedBy: null, // Could link to user if they have an account

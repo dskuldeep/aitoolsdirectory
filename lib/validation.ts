@@ -13,6 +13,7 @@ export const submissionSchema = z.object({
     pricing: z.string().optional(),
     license: z.string().optional(),
     integrations: z.array(z.string()).optional(),
+    icon: z.string().url('Invalid icon URL').optional().or(z.literal('')),
     screenshots: z
       .array(
         z.object({

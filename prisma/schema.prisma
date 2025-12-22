@@ -87,6 +87,7 @@ model Tool {
   pricing       String?   // e.g., Free, Freemium, Paid
   license       String?
   integrations  String[]
+  icon          String?   // Icon URL or image ID reference
   screenshots   Json?     // array of image URLs/objects
   approved      Boolean   @default(false)
   featured      Boolean   @default(false)

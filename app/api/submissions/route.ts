@@ -51,10 +51,65 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Extract image IDs from body (not in validation schema, but needed for storage)
+    const iconImageId = body.iconImageId as string | undefined
+    const screenshotImageIds = (body.screenshotImageIds as string[] | undefined) || []
+
+    // Verify that image IDs exist in database (if provided)
+    if (iconImageId) {
+      const iconImage = await prisma.image.findUnique({
+        where: { id: iconImageId },
+      })
+      if (!iconImage) {
+        return NextResponse.json({ error: 'Invalid icon image ID' }, { status: 400 })
+      }
+    }
+
+    if (screenshotImageIds.length > 0) {
+      const screenshotImages = await prisma.image.findMany({
+        where: { id: { in: screenshotImageIds } },
+      })
+      if (screenshotImages.length !== screenshotImageIds.length) {
+        return NextResponse.json({ error: 'Invalid screenshot image ID(s)' }, { status: 400 })
+      }
+    }
+
+    // Build screenshots array from uploaded image IDs
+    const screenshotsFromUploads = screenshotImageIds.map((imageId: string) => ({
+      url: `/api/images/${imageId}`,
+      alt: '',
+      imageId,
+    }))
+
+    // Get existing screenshots from toolData (URL-based screenshots)
+    const existingScreenshots = (validated.toolData.screenshots || []).map((screenshot: any) => ({
+      ...screenshot,
+      // Keep existing imageId if present, otherwise undefined
+      imageId: screenshot.imageId || undefined,
+    }))
+
+    // Combine: first uploaded screenshots (from image IDs), then URL-based screenshots
+    const allScreenshots = [...screenshotsFromUploads, ...existingScreenshots]
+
+    // Set icon URL if iconImageId is provided but icon URL is not
+    let iconUrl = validated.toolData.icon
+    if (iconImageId && !iconUrl) {
+      iconUrl = `/api/images/${iconImageId}`
+    }
+
+    // Prepare toolData with image references
+    const toolDataWithImages = {
+      ...validated.toolData,
+      icon: iconUrl || undefined,
+      iconImageId: iconImageId || undefined,
+      screenshots: allScreenshots.length > 0 ? allScreenshots : undefined,
+      screenshotImageIds: screenshotImageIds.length > 0 ? screenshotImageIds : undefined,
+    }
+
     // Create submission
     const submission = await prisma.submission.create({
       data: {
-        toolData: validated.toolData as any,
+        toolData: toolDataWithImages as any,
         submitterEmail: validated.submitterEmail,
         submitterName: validated.submitterName,
         status: 'pending',

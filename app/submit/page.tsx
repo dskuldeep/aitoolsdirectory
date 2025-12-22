@@ -27,8 +27,11 @@ const CATEGORIES = [
 const PRICING_OPTIONS = ['Free', 'Freemium', 'Paid', 'Open Source', 'Enterprise']
 
 export default function SubmitPage() {
-  const [screenshots, setScreenshots] = useState<Array<{ url: string; alt?: string }>>([])
+  const [screenshots, setScreenshots] = useState<Array<{ url: string; alt?: string; imageId?: string }>>([])
+  const [iconUrl, setIconUrl] = useState<string>('')
+  const [iconImageId, setIconImageId] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
+  const [uploadingIcon, setUploadingIcon] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -60,20 +63,58 @@ export default function SubmitPage() {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch('/api/upload', {
+      const response = await fetch('/api/upload/public', {
         method: 'POST',
         body: formData,
       })
 
-      if (!response.ok) throw new Error('Upload failed')
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Upload failed')
+      }
 
       const data = await response.json()
-      setScreenshots([...screenshots, { url: data.url, alt: '' }])
+      setScreenshots([...screenshots, { url: data.url, alt: '', imageId: data.id }])
     } catch (err: any) {
       setError(err.message || 'Failed to upload image')
     } finally {
       setUploading(false)
     }
+  }
+
+  const handleIconUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploadingIcon(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('/api/upload/public', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Upload failed')
+      }
+
+      const data = await response.json()
+      setIconUrl(data.url)
+      setIconImageId(data.id)
+    } catch (err: any) {
+      setError(err.message || 'Failed to upload icon')
+    } finally {
+      setUploadingIcon(false)
+    }
+  }
+
+  const handleIconUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value
+    setIconUrl(url)
+    setIconImageId(null) // Clear imageId when using URL
   }
 
   const removeScreenshot = (index: number) => {
@@ -102,8 +143,11 @@ export default function SubmitPage() {
         ...data,
         toolData: {
           ...data.toolData,
+          icon: iconUrl || undefined,
           screenshots,
         },
+        iconImageId: iconImageId || undefined,
+        screenshotImageIds: screenshots.map(s => s.imageId).filter(Boolean),
         honeypot: '', // Honeypot field
       }
 
@@ -208,6 +252,54 @@ export default function SubmitPage() {
                   />
                   {errors.toolData?.tagline && (
                     <p className="mt-1 text-sm text-red-600">{errors.toolData.tagline.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium">Icon</label>
+                  <div className="space-y-2">
+                    <Input
+                      value={iconUrl}
+                      onChange={handleIconUrlChange}
+                      type="url"
+                      placeholder="https://example.com/icon.png"
+                    />
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-neutral-500">or</span>
+                      <label className="flex cursor-pointer items-center gap-2 rounded-button border border-neutral-300 bg-white px-3 py-2 text-sm transition-colors hover:border-primary-500 dark:border-neutral-700 dark:bg-neutral-800">
+                        <PhotoIcon className="h-4 w-4" />
+                        <span>{uploadingIcon ? 'Uploading...' : 'Upload Icon'}</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleIconUpload}
+                          className="hidden"
+                          disabled={uploadingIcon}
+                        />
+                      </label>
+                    </div>
+                    {iconUrl && (
+                      <div className="mt-2 flex items-center gap-2">
+                        <img
+                          src={iconUrl}
+                          alt="Icon preview"
+                          className="h-16 w-16 rounded-md object-cover"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIconUrl('')
+                            setIconImageId(null)
+                          }}
+                          className="rounded-full bg-red-500 p-1 text-white hover:bg-red-600"
+                        >
+                          <XMarkIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  {errors.toolData?.icon && (
+                    <p className="mt-1 text-sm text-red-600">{errors.toolData.icon.message}</p>
                   )}
                 </div>
 
