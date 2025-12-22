@@ -23,7 +23,8 @@ const nextConfig = {
     // Only fail on errors, not warnings during build
     ignoreBuildErrors: false,
   },
-  // Cloudflare Pages configuration - @cloudflare/next-on-pages will handle output
+  // Output configuration for Fly.io deployment
+  output: 'standalone',
 }
 
 module.exports = nextConfig
