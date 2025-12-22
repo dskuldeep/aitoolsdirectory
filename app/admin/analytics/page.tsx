@@ -2,7 +2,6 @@ import { prisma } from '@/lib/prisma'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-export const runtime = "edge"
 
 export const revalidate = 60
 

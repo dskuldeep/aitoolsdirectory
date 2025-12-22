@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card'
 import { BulkApproveButton } from '@/components/admin/bulk-approve-button'
 import { SubmissionsTable } from '@/components/admin/submissions-table'
 
-export const runtime = "edge"
 
 export const revalidate = 60
 

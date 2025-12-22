@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { formatDate } from '@/lib/utils'
 import { ArticleActions } from '@/components/admin/article-actions'
 
-export const runtime = "edge"
 
 export const revalidate = 60
 

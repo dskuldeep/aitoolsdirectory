@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
 
-export const runtime = "edge"
 
 // Public upload endpoint for submissions (no auth required)
 export async function POST(request: NextRequest) {

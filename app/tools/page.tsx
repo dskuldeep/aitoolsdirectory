@@ -12,7 +12,6 @@ import { SparklesIcon } from '@heroicons/react/24/outline'
 import { getCanonicalUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
 
-export const runtime = "edge"
 
 // Use SSR for tools listing
 export const dynamic = 'force-dynamic'

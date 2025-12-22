@@ -6,7 +6,6 @@ import { slugify } from '@/lib/utils'
 import { z } from 'zod'
 import { indexTool } from '@/lib/search'
 
-export const runtime = "edge"
 
 const toolSchema = z.object({
   name: z.string().min(1).max(200),

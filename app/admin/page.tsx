@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
-export const runtime = "edge"
 
 // Force dynamic rendering for admin pages
 export const dynamic = 'force-dynamic'

@@ -4,7 +4,6 @@ import { requireAdmin } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { deleteTool as removeToolFromSearch } from '@/lib/search'
 
-export const runtime = "edge"
 
 export async function POST(request: NextRequest) {
   try {

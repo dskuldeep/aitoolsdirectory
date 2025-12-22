@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate --no-engine && next build",
-    "pages:build": "npm run build && npx @cloudflare/next-on-pages",
-    "pages:deploy": "npx wrangler pages deploy .vercel/output/static",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "postinstall": "SKIP_ENV_VALIDATION=true prisma generate --no-engine",
+    "postinstall": "prisma generate",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
@@ -69,7 +67,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "1.12.0",
     "@playwright/test": "^1.44.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^16.0.0",

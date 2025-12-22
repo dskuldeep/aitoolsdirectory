@@ -6,7 +6,6 @@ import { Badge } from '@/components/ui/badge'
 import { ApproveSubmissionButton, RejectSubmissionButton } from '@/components/admin/moderation-actions'
 import { formatDate } from '@/lib/utils'
 
-export const runtime = "edge"
 
 export const revalidate = 60
 

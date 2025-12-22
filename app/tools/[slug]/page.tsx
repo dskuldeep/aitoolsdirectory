@@ -13,7 +13,6 @@ import rehypeSanitize from 'rehype-sanitize'
 import { IconButton } from '@/components/ui/icon-button'
 import { ToolLogo } from '@/components/tools/tool-logo'
 
-export const runtime = "edge"
 
 // Use SSR for tool pages
 export const dynamic = 'force-dynamic'

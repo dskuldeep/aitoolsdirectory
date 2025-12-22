@@ -11,7 +11,6 @@ import { formatDate, getCanonicalUrl } from '@/lib/utils'
 import { SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline'
 import type { Metadata } from 'next'
 
-export const runtime = "edge"
 
 // Use SSR for homepage
 export const dynamic = 'force-dynamic'

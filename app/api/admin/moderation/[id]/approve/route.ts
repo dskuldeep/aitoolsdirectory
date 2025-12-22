@@ -6,7 +6,6 @@ import { sendSubmissionApprovedEmail } from '@/lib/email'
 import { indexTool } from '@/lib/search'
 import { slugify } from '@/lib/utils'
 
-export const runtime = "edge"
 
 export async function POST(
   request: NextRequest,
