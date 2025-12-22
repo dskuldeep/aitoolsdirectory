@@ -45,15 +45,20 @@ Add the following environment variables in Cloudflare Pages settings:
 
 #### Required Variables
 
-**Note**: For build to succeed, you can either:
-- Set `DATABASE_URL` (recommended if your database is accessible during build)
-- Or leave it unset - the build will complete but routes that need database will return empty data
+**Important**: For the build phase, do NOT set `DATABASE_URL` as an environment variable. The database is only needed at runtime, not during build.
+
+**Build Environment Variables** (Set these in Cloudflare Pages):
 
 ```env
-DATABASE_URL=postgresql://user:password@host:5432/database?sslmode=require
 NEXTAUTH_URL=https://agitracker.io
 NEXTAUTH_SECRET=your-secret-key-generate-with-openssl-rand-base64-32
 NPM_CONFIG_LEGACY_PEER_DEPS=true
+```
+
+**Runtime Environment Variables** (Set these separately for Production/Preview):
+
+```env
+DATABASE_URL=postgresql://user:password@host:5432/database?sslmode=require
 ```
 
 #### Optional Variables
