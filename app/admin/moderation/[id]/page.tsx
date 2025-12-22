@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation'
-export const runtime = "edge"
 
 import { prisma } from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ApproveSubmissionButton, RejectSubmissionButton } from '@/components/admin/moderation-actions'
 import { formatDate } from '@/lib/utils'
+
+export const runtime = "edge"
 
 export const revalidate = 60
 

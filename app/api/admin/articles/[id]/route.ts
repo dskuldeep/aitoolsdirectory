@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-export const runtime = "edge"
 
 import { requireAdmin } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 import { z } from 'zod'
+
+export const runtime = "edge"
 
 const articleSchema = z.object({
   title: z.string().min(1).max(200),

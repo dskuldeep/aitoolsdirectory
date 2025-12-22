@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma'
-export const runtime = "edge"
 
 import { Article } from '@prisma/client'
+
+export const runtime = "edge"
 
 type ArticleWithAuthor = Article & {
   author: {

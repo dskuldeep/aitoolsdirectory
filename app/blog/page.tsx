@@ -1,5 +1,4 @@
 import { Header } from '@/components/layout/header'
-export const runtime = "edge"
 
 import { Footer } from '@/components/layout/footer'
 import { Container } from '@/components/layout/container'
@@ -11,6 +10,8 @@ import Link from 'next/link'
 import { formatDate, getCanonicalUrl } from '@/lib/utils'
 import { SparklesIcon } from '@heroicons/react/24/outline'
 import type { Metadata } from 'next'
+
+export const runtime = "edge"
 
 // Use SSR for blog listing
 export const dynamic = 'force-dynamic'

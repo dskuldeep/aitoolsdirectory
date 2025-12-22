@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-export const runtime = "edge"
 
 import { prisma } from '@/lib/prisma'
 import { submissionSchema } from '@/lib/validation'
 import { sendSubmissionReceivedEmail, sendAdminNotificationEmail } from '@/lib/email'
 import { slugify } from '@/lib/utils'
+
+export const runtime = "edge"
 
 export async function POST(request: NextRequest) {
   try {

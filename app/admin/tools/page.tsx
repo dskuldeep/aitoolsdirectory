@@ -1,10 +1,11 @@
 import { prisma } from '@/lib/prisma'
-export const runtime = "edge"
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ToolsTable } from '@/components/admin/tools-table'
+
+export const runtime = "edge"
 
 export const revalidate = 60
 

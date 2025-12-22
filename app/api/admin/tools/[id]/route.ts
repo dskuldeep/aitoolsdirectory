@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-export const runtime = "edge"
 
 import { requireAdmin } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 import { z } from 'zod'
 import { updateTool, deleteTool as removeToolFromSearch } from '@/lib/search'
+
+export const runtime = "edge"
 
 const toolSchema = z.object({
   name: z.string().min(1).max(200),

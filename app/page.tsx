@@ -1,5 +1,4 @@
 import Link from 'next/link'
-export const runtime = "edge"
 
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
@@ -11,6 +10,8 @@ import { prisma } from '@/lib/prisma'
 import { formatDate, getCanonicalUrl } from '@/lib/utils'
 import { SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline'
 import type { Metadata } from 'next'
+
+export const runtime = "edge"
 
 // Use SSR for homepage
 export const dynamic = 'force-dynamic'

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-export const runtime = "edge"
 
 import { searchTools } from '@/lib/search'
+
+export const runtime = "edge"
 
 export const dynamic = 'force-dynamic'
 

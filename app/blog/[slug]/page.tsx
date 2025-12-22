@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-export const runtime = "edge"
 
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
@@ -12,6 +11,8 @@ import sanitizeHtml from 'sanitize-html'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeSanitize from 'rehype-sanitize'
+
+export const runtime = "edge"
 
 // Use SSR for blog articles
 export const dynamic = 'force-dynamic'

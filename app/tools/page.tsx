@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-export const runtime = "edge"
 
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
@@ -12,6 +11,8 @@ import { prisma } from '@/lib/prisma'
 import { SparklesIcon } from '@heroicons/react/24/outline'
 import { getCanonicalUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
+
+export const runtime = "edge"
 
 // Use SSR for tools listing
 export const dynamic = 'force-dynamic'

@@ -1,5 +1,4 @@
 'use client'
-export const runtime = "edge"
 
 
 import { useState } from 'react'
@@ -10,6 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+export const runtime = "edge"
 
 const toolSchema = z.object({
   name: z.string().min(1, 'Name is required').max(200),

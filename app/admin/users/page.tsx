@@ -1,9 +1,10 @@
 import { prisma } from '@/lib/prisma'
-export const runtime = "edge"
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/lib/utils'
+
+export const runtime = "edge"
 
 export const revalidate = 60
 
