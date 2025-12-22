@@ -1,9 +1,22 @@
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function GET() {
   const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
 
-  const articles = await prisma.article.findMany({
+  let articles = []
+  
+  // Skip database queries during build/export phase
+  const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-export'
+  
+  if (isBuildPhase || !process.env.DATABASE_URL) {
+    console.warn('Skipping database query during build phase or DATABASE_URL not available')
+    articles = []
+  } else {
+    try {
+      articles = await prisma.article.findMany({
     where: { published: true },
     take: 20,
     orderBy: { publishedAt: 'desc' },
@@ -15,7 +28,13 @@ export async function GET() {
         },
       },
     },
-  })
+      })
+    } catch (error) {
+      console.error('Failed to fetch articles for feed:', error)
+      // Return empty feed if database is not available
+      articles = []
+    }
+  }
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

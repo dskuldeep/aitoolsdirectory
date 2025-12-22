@@ -45,6 +45,10 @@ Add the following environment variables in Cloudflare Pages settings:
 
 #### Required Variables
 
+**Note**: For build to succeed, you can either:
+- Set `DATABASE_URL` (recommended if your database is accessible during build)
+- Or leave it unset - the build will complete but routes that need database will return empty data
+
 ```env
 DATABASE_URL=postgresql://user:password@host:5432/database?sslmode=require
 NEXTAUTH_URL=https://agitracker.io
