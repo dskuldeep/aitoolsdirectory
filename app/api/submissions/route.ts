@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+export const runtime = "edge"
+
 import { prisma } from '@/lib/prisma'
 import { submissionSchema } from '@/lib/validation'
 import { sendSubmissionReceivedEmail, sendAdminNotificationEmail } from '@/lib/email'

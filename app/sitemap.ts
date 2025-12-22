@@ -1,4 +1,6 @@
 import { MetadataRoute } from 'next'
+export const runtime = "edge"
+
 import { prisma } from '@/lib/prisma'
 
 export const dynamic = 'force-dynamic'

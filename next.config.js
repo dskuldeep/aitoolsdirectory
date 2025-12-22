@@ -14,8 +14,6 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
-    // Set default runtime to edge for Cloudflare Pages compatibility
-    runtime: 'edge',
   },
   eslint: {
     // Only fail on errors, not warnings during build

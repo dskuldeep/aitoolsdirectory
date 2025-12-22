@@ -1,4 +1,6 @@
 import { prisma } from '@/lib/prisma'
+export const runtime = "edge"
+
 import { Card, CardContent } from '@/components/ui/card'
 import { BulkApproveButton } from '@/components/admin/bulk-approve-button'
 import { SubmissionsTable } from '@/components/admin/submissions-table'

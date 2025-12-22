@@ -1,4 +1,6 @@
 import { notFound } from 'next/navigation'
+export const runtime = "edge"
+
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Container } from '@/components/layout/container'

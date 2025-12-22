@@ -1,4 +1,6 @@
 import { getServerSession } from 'next-auth'
+export const runtime = "edge"
+
 import { authOptions } from '@/lib/auth-config'
 import { getCurrentUser } from '@/lib/auth'
 import { NextResponse } from 'next/server'

@@ -1,4 +1,6 @@
 import { Header } from '@/components/layout/header'
+export const runtime = "edge"
+
 import { Footer } from '@/components/layout/footer'
 import { Container } from '@/components/layout/container'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
