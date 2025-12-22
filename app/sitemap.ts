@@ -7,8 +7,8 @@ export const revalidate = 0
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
 
-  let tools = []
-  let articles = []
+  let tools: Array<{ slug: string; updatedAt: Date }> = []
+  let articles: Array<{ slug: string; updatedAt: Date }> = []
   
   // Skip database queries during build/export phase
   const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-export'

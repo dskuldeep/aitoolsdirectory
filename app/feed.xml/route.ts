@@ -1,4 +1,12 @@
 import { prisma } from '@/lib/prisma'
+import { Article, User } from '@prisma/client'
+
+type ArticleWithAuthor = Article & {
+  author: {
+    name: string | null
+    email: string
+  }
+}
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -6,7 +14,7 @@ export const revalidate = 0
 export async function GET() {
   const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
 
-  let articles = []
+  let articles: ArticleWithAuthor[] = []
   
   // Skip database queries during build/export phase
   const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-export'
