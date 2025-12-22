@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { Article, User } from '@prisma/client'
+import { Article } from '@prisma/client'
 
 type ArticleWithAuthor = Article & {
   author: {
