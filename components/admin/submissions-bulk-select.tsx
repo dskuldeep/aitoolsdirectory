@@ -18,14 +18,6 @@ export function SubmissionsBulkSelect({ submissions }: SubmissionsBulkSelectProp
     }
   }
 
-  const handleSelectOne = (id: number) => {
-    if (selectedIds.includes(id)) {
-      setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id))
-    } else {
-      setSelectedIds([...selectedIds, id])
-    }
-  }
-
   const handleDeleteComplete = () => {
     setSelectedIds([])
   }
