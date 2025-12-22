@@ -14,8 +14,9 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
+    // Set default runtime to edge for Cloudflare Pages compatibility
+    runtime: 'edge',
   },
-  // Prisma will be generated automatically during build
   eslint: {
     // Only fail on errors, not warnings during build
     ignoreDuringBuilds: false,
