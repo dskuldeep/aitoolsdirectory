@@ -154,7 +154,7 @@ export function HeroImageUpload({ value, onChange, error }: HeroImageUploadProps
         <Input
           ref={urlInputRef}
           type="url"
-          placeholder="https://example.com/image.jpg"
+          placeholder="https://agitracker.io/image.jpg"
           defaultValue={value && value.startsWith('http') ? value : ''}
           onChange={(e) => handleUrlChange(e.target.value)}
           className="flex-1"

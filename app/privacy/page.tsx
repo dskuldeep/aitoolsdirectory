@@ -5,8 +5,8 @@ import { getCanonicalUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | AI Tool Directory',
-  description: 'Privacy Policy for AI Tool Directory.',
+  title: 'Privacy Policy | AGI Tracker',
+  description: 'Privacy Policy for AGI Tracker.',
   alternates: {
     canonical: getCanonicalUrl('/privacy'),
   },

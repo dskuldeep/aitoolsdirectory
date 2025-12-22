@@ -13,7 +13,7 @@ This project uses [Neon](https://neon.tech) as the PostgreSQL database provider.
 ### 2. Create a New Project
 
 1. Click "Create Project" in the Neon dashboard
-2. Choose a project name (e.g., "ai-tool-directory")
+2. Choose a project name (e.g., "agitracker")
 3. Select a region closest to your deployment
 4. Choose PostgreSQL version (15+ recommended)
 5. Click "Create Project"

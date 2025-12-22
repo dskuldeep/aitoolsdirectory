@@ -183,7 +183,7 @@ export default function NewToolPage() {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
                 <label className="mb-1 block text-sm font-medium">Website URL</label>
-                <Input {...register('website')} type="url" placeholder="https://example.com" />
+                <Input {...register('website')} type="url" placeholder="https://agitracker.io" />
                 {errors.website && (
                   <p className="mt-1 text-sm text-red-600">{errors.website.message}</p>
                 )}
@@ -233,7 +233,7 @@ export default function NewToolPage() {
               <label className="mb-1 block text-sm font-medium">Screenshot URLs</label>
               <Input
                 {...register('screenshots')}
-                placeholder="https://example.com/screenshot1.png, https://example.com/screenshot2.png"
+                placeholder="https://agitracker.io/screenshot1.png, https://agitracker.io/screenshot2.png"
               />
               <p className="mt-1 text-xs text-neutral-500">Separate URLs with commas</p>
             </div>

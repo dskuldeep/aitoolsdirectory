@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const description = tool.tagline || tool.description.slice(0, 160)
   const screenshots = tool.screenshots as any
   const image = screenshots?.[0]?.url || `${process.env.NEXTAUTH_URL}/og-image.png`
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
   const canonicalUrl = `${baseUrl}/tools/${params.slug}`
 
   return {
@@ -114,8 +114,8 @@ export default async function ToolPage({ params }: { params: { slug: string } })
       price: tool.pricing || 'Free',
       priceCurrency: 'USD',
     },
-    image: (tool.screenshots as any)?.[0]?.url || `${process.env.NEXTAUTH_URL || 'https://example.com'}/og-image.png`,
-    url: tool.website || `${process.env.NEXTAUTH_URL || 'https://example.com'}/tools/${tool.slug}`,
+    image: (tool.screenshots as any)?.[0]?.url || `${process.env.NEXTAUTH_URL || 'https://agitracker.io'}/og-image.png`,
+    url: tool.website || `${process.env.NEXTAUTH_URL || 'https://agitracker.io'}/tools/${tool.slug}`,
     datePublished: tool.createdAt.toISOString(),
     keywords: tool.tags.join(', '),
     ...(tool.views > 0 && {

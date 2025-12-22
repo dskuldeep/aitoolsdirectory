@@ -1,4 +1,4 @@
-# AI Tool Directory Platform
+# AGI Tracker Platform
 
 A beautiful, modern, SEO-first web platform for AI tool builders to submit and manage tool listings, and for the team to publish news and blog posts.
 
@@ -36,8 +36,8 @@ A beautiful, modern, SEO-first web platform for AI tool builders to submit and m
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/dskuldeep/aitoolsdirectory.git
-cd aitoolsdirectory
+git clone https://github.com/dskuldeep/agitracker.git
+cd agitracker
 ```
 
 2. Install dependencies:
@@ -85,7 +85,7 @@ git init
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/dskuldeep/aitoolsdirectory.git
+git remote add origin https://github.com/dskuldeep/agitracker.git
 git push -u origin main
 ```
 
@@ -96,7 +96,7 @@ git push -u origin main
 3. Import your GitHub repository
 4. Configure environment variables in Vercel dashboard:
    - Add all variables from `.env.example`
-   - Set `NEXTAUTH_URL` to your Vercel domain (e.g., `https://your-app.vercel.app`)
+   - Set `NEXTAUTH_URL` to your Vercel domain (e.g., `https://agitracker.io`)
    - Set `DATABASE_URL` to your production database connection string
 
 5. Configure build settings:
@@ -149,7 +149,7 @@ See `.env.example` for all required environment variables.
 ## Project Structure
 
 ```
-agent-directory/
+agitracker/
 ├── app/                    # Next.js app directory
 │   ├── (public)/          # Public pages
 │   ├── admin/            # Admin dashboard
@@ -181,7 +181,7 @@ agent-directory/
 ## Admin Access
 
 Default admin credentials (change after first login):
-- Email: `admin@example.com`
+- Email: `admin@agitracker.io`
 - Password: `admin123`
 
 **Important**: Change the admin password immediately after deployment!

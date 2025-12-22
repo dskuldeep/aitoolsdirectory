@@ -1,6 +1,6 @@
 # Vercel Deployment Guide
 
-This guide will help you deploy the AI Tool Directory Platform to Vercel.
+This guide will help you deploy the AGI Tracker Platform to Vercel.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This guide will help you deploy the AI Tool Directory Platform to Vercel.
 
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
 2. Click **"Add New Project"**
-3. Import your GitHub repository: `dskuldeep/aitoolsdirectory`
+3. Import your GitHub repository: `dskuldeep/agitracker`
 4. Vercel will automatically detect it's a Next.js project
 
 ### 2. Configure Project Settings
@@ -34,12 +34,12 @@ Add the following environment variables in Vercel dashboard:
 
 ```env
 DATABASE_URL=postgresql://user:password@host:5432/database?sslmode=require
-NEXTAUTH_URL=https://your-app.vercel.app
+NEXTAUTH_URL=https://agitracker.io
 NEXTAUTH_SECRET=your-secret-key-generate-with-openssl-rand-base64-32
 ```
 
 **Important Notes:**
-- `NEXTAUTH_URL` should be your Vercel deployment URL (e.g., `https://aitoolsdirectory.vercel.app`)
+- `NEXTAUTH_URL` should be your Vercel deployment URL (e.g., `https://agitracker.io`)
 - Generate `NEXTAUTH_SECRET` using: `openssl rand -base64 32`
 - `DATABASE_URL` should be your production Neon database connection string
 
@@ -54,7 +54,7 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 # Email Service (Resend)
 EMAIL_API_KEY=re_your_resend_api_key
-EMAIL_FROM=noreply@yourdomain.com
+EMAIL_FROM=noreply@agitracker.io
 
 # Meilisearch (optional)
 MEILISEARCH_HOST=https://your-meilisearch-instance.com
@@ -80,7 +80,7 @@ Vercel will automatically detect Next.js, but you can verify:
 
 1. Click **"Deploy"**
 2. Wait for the build to complete (usually 2-3 minutes)
-3. Your app will be live at `https://your-app.vercel.app`
+3. Your app will be live at `https://agitracker.io`
 
 ### 6. Post-Deployment Setup
 

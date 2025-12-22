@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container-custom py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-lg font-semibold">AI Tool Directory</h3>
+            <h3 className="mb-4 text-lg font-semibold">AGI Tracker</h3>
             <p className="text-sm text-neutral-600 dark:text-neutral-400">
               Discover the best AI tools for productivity, development, and creativity.
             </p>
@@ -96,7 +96,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-neutral-200 pt-8 text-center text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
-          <p>&copy; {new Date().getFullYear()} AI Tool Directory. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} AGI Tracker. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -5,8 +5,8 @@ import { getCanonicalUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | AI Tool Directory',
-  description: 'Terms of Service for AI Tool Directory.',
+  title: 'Terms of Service | AGI Tracker',
+  description: 'Terms of Service for AGI Tracker.',
   alternates: {
     canonical: getCanonicalUrl('/terms'),
   },
@@ -29,7 +29,7 @@ export default function TermsPage() {
               </p>
               <h2 className="mt-8 text-2xl font-semibold">Use License</h2>
               <p className="text-neutral-600 dark:text-neutral-400">
-                Permission is granted to temporarily access the materials on AI Tool Directory for
+                Permission is granted to temporarily access the materials on AGI Tracker for
                 personal, non-commercial transitory viewing only.
               </p>
               <h2 className="mt-8 text-2xl font-semibold">User Submissions</h2>
@@ -39,7 +39,7 @@ export default function TermsPage() {
               </p>
               <h2 className="mt-8 text-2xl font-semibold">Limitations</h2>
               <p className="text-neutral-600 dark:text-neutral-400">
-                In no event shall AI Tool Directory or its suppliers be liable for any damages arising out
+                In no event shall AGI Tracker or its suppliers be liable for any damages arising out
                 of the use or inability to use the materials on this website.
               </p>
             </div>

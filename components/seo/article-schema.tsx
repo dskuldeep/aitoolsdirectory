@@ -29,7 +29,7 @@ export function ArticleSchema({ article }: ArticleSchemaProps) {
       : undefined,
     publisher: {
       '@type': 'Organization',
-      name: 'AI Tool Directory',
+      name: 'AGI Tracker',
       logo: {
         '@type': 'ImageObject',
         url: `${process.env.NEXTAUTH_URL}/logo.png`,

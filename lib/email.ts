@@ -3,8 +3,8 @@ import { Resend } from 'resend'
 // Only initialize Resend if API key is provided
 const resend = process.env.EMAIL_API_KEY ? new Resend(process.env.EMAIL_API_KEY) : null
 
-const FROM_EMAIL = process.env.EMAIL_FROM || 'noreply@example.com'
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com'
+const FROM_EMAIL = process.env.EMAIL_FROM || 'noreply@agitracker.io'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@agitracker.io'
 
 export async function sendEmail({
   to,
@@ -67,7 +67,7 @@ export async function sendSubmissionReceivedEmail(submitterEmail: string, submit
             <p>Hi ${name},</p>
             <p>We've received your tool submission and our team will review it shortly. You'll receive another email once we've reviewed your submission.</p>
             <p>If you have any questions, feel free to reach out to us.</p>
-            <p>Best regards,<br>The AI Tool Directory Team</p>
+            <p>Best regards,<br>The AGI Tracker Team</p>
           </div>
         </div>
       </body>
@@ -78,7 +78,7 @@ export async function sendSubmissionReceivedEmail(submitterEmail: string, submit
     to: submitterEmail,
     subject: 'Your Tool Submission Has Been Received',
     html,
-    text: `Hi ${name},\n\nWe've received your tool submission and our team will review it shortly. You'll receive another email once we've reviewed your submission.\n\nBest regards,\nThe AI Tool Directory Team`,
+    text: `Hi ${name},\n\nWe've received your tool submission and our team will review it shortly. You'll receive another email once we've reviewed your submission.\n\nBest regards,\nThe AGI Tracker Team`,
   })
 }
 
@@ -112,8 +112,8 @@ export async function sendSubmissionApprovedEmail(
             <p>Hi ${name},</p>
             <p>Great news! Your tool <strong>${toolName}</strong> has been approved and is now live on our directory.</p>
             <p><a href="${toolUrl}" class="button">View Your Tool</a></p>
-            <p>Thank you for contributing to the AI Tool Directory!</p>
-            <p>Best regards,<br>The AI Tool Directory Team</p>
+            <p>Thank you for contributing to AGI Tracker!</p>
+            <p>Best regards,<br>The AGI Tracker Team</p>
           </div>
         </div>
       </body>
@@ -124,7 +124,7 @@ export async function sendSubmissionApprovedEmail(
     to: submitterEmail,
     subject: `Your Tool "${toolName}" Has Been Approved`,
     html,
-    text: `Hi ${name},\n\nGreat news! Your tool ${toolName} has been approved and is now live on our directory.\n\nView it here: ${toolUrl}\n\nThank you for contributing!\n\nBest regards,\nThe AI Tool Directory Team`,
+    text: `Hi ${name},\n\nGreat news! Your tool ${toolName} has been approved and is now live on our directory.\n\nView it here: ${toolUrl}\n\nThank you for contributing!\n\nBest regards,\nThe AGI Tracker Team`,
   })
 }
 
@@ -157,7 +157,7 @@ export async function sendSubmissionRejectedEmail(
             <p>We've reviewed your submission for <strong>${toolName}</strong>, but unfortunately we're unable to approve it at this time.</p>
             ${reason ? `<p><strong>Reason:</strong> ${reason}</p>` : ''}
             <p>If you'd like to resubmit with changes, please feel free to do so.</p>
-            <p>Best regards,<br>The AI Tool Directory Team</p>
+            <p>Best regards,<br>The AGI Tracker Team</p>
           </div>
         </div>
       </body>
@@ -168,7 +168,7 @@ export async function sendSubmissionRejectedEmail(
     to: submitterEmail,
     subject: `Update on Your Tool Submission: ${toolName}`,
     html,
-    text: `Hi ${name},\n\nWe've reviewed your submission for ${toolName}, but unfortunately we're unable to approve it at this time.${reason ? `\n\nReason: ${reason}` : ''}\n\nIf you'd like to resubmit with changes, please feel free to do so.\n\nBest regards,\nThe AI Tool Directory Team`,
+    text: `Hi ${name},\n\nWe've reviewed your submission for ${toolName}, but unfortunately we're unable to approve it at this time.${reason ? `\n\nReason: ${reason}` : ''}\n\nIf you'd like to resubmit with changes, please feel free to do so.\n\nBest regards,\nThe AGI Tracker Team`,
   })
 }
 

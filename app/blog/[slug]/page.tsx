@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   const description = article.excerpt || article.body.slice(0, 160)
   const image = article.heroImage || `${process.env.NEXTAUTH_URL}/og-image.png`
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
   const canonicalUrl = `${baseUrl}/blog/${params.slug}`
 
   return {
@@ -108,7 +108,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
   const relatedArticles = await getRelatedArticles(article.id, article.tags)
   const readTime = readingTime(article.body)
 
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
   const schemaJson = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -119,7 +119,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     dateModified: article.updatedAt.toISOString(),
     publisher: {
       '@type': 'Organization',
-      name: 'AI Tool Directory',
+      name: 'AGI Tracker',
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/logo.png`,

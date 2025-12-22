@@ -72,7 +72,7 @@ export default function SignInPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@example.com"
+                    placeholder="admin@agitracker.io"
                     required
                     autoFocus
                   />

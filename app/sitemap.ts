@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
 
   // Get all approved tools
   const tools = await prisma.tool.findMany({

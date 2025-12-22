@@ -262,7 +262,7 @@ export default function SubmitPage() {
                       value={iconUrl}
                       onChange={handleIconUrlChange}
                       type="url"
-                      placeholder="https://example.com/icon.png"
+                      placeholder="https://agitracker.io/icon.png"
                     />
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-neutral-500">or</span>
@@ -392,7 +392,7 @@ export default function SubmitPage() {
                   <Input
                     {...register('toolData.website')}
                     type="url"
-                    placeholder="https://example.com"
+                    placeholder="https://agitracker.io"
                   />
                 </div>
 

@@ -5,8 +5,8 @@ import { getCanonicalUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About | AI Tool Directory',
-  description: 'Learn about the AI Tool Directory and our mission to help you discover the best AI tools.',
+  title: 'About | AGI Tracker',
+  description: 'Learn about AGI Tracker and our mission to help you discover the best AI tools.',
   alternates: {
     canonical: getCanonicalUrl('/about'),
   },
@@ -22,7 +22,7 @@ export default function AboutPage() {
             <h1 className="mb-8 text-4xl font-bold">About</h1>
             <div className="prose prose-neutral dark:prose-invert max-w-none">
               <p className="text-lg text-neutral-600 dark:text-neutral-400">
-                AI Tool Directory is a curated platform dedicated to helping you discover the best AI tools
+                AGI Tracker is a curated platform dedicated to helping you discover the best AI tools
                 for productivity, development, design, and creativity.
               </p>
               <h2 className="mt-8 text-2xl font-semibold">Our Mission</h2>

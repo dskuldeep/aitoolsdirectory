@@ -9,12 +9,12 @@ async function main() {
   // Create admin user with password
   const adminPassword = await hash('admin123', 10)
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@example.com' },
+    where: { email: 'admin@agitracker.io' },
     update: {
       password: adminPassword, // Update password if user exists
     },
     create: {
-      email: 'admin@example.com',
+      email: 'admin@agitracker.io',
       name: 'Admin User',
       role: 'admin',
       password: adminPassword,
@@ -23,10 +23,10 @@ async function main() {
 
   // Create editor user
   const editor = await prisma.user.upsert({
-    where: { email: 'editor@example.com' },
+    where: { email: 'editor@agitracker.io' },
     update: {},
     create: {
-      email: 'editor@example.com',
+      email: 'editor@agitracker.io',
       name: 'Editor User',
       role: 'editor',
     },

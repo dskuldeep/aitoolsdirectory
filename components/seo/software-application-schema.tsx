@@ -10,7 +10,7 @@ interface SoftwareApplicationSchemaProps {
 
 export function SoftwareApplicationSchema({ tool }: SoftwareApplicationSchemaProps) {
   const screenshots = tool.screenshots as any
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
   const image = screenshots?.[0]?.url || `${baseUrl}/og-image.png`
 
   const schema: any = {

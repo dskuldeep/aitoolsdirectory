@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://example.com'
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://agitracker.io'
 
   const articles = await prisma.article.findMany({
     where: { published: true },
@@ -20,7 +20,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AI Tool Directory Blog</title>
+    <title>AGI Tracker Blog</title>
     <description>Latest news and articles about AI tools</description>
     <link>${baseUrl}</link>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>
