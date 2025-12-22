@@ -24,7 +24,7 @@ This guide will help you deploy the AGI Tracker Platform to Cloudflare Pages.
 In the **Build configuration** section:
 
 - **Framework preset**: Select **Next.js (Static HTML Export)** or **None**
-- **Build command**: `npm run build`
+- **Build command**: `npx @cloudflare/next-on-pages@1`
 - **Build output directory**: `.vercel/output/static`
 - **Root directory**: `/` (leave empty or use `/`)
 
